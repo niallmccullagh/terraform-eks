@@ -22,8 +22,8 @@ data "aws_region" "current" {}
 # the cluster in a single terraform apply.
 # https://github.com/terraform-providers/terraform-provider-kubernetes/issues/161
 #
-data "external" "heptio_authenticator_aws" {
-  program = ["bash", "${path.module}/Authenticator.sh"]
+data "external" "aws-iam-authenticator" {
+  program = ["bash", "${path.module}/authenticator.sh"]
 
   query {
     cluster_name = "${var.cluster_name}"

@@ -1,4 +1,5 @@
-cluster_name = "demo"
+cluster_name = "test"
 availability_zones = ["us-east-1b", "us-east-1c", "us-east-1d"]
 number_of_nodes = "1"
 node_instance_type = "m4.large"
+region = "us-east-1"
