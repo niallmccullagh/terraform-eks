@@ -37,6 +37,6 @@ provider "kubernetes" {
   version = "~> 1.1"
   host                   = "${aws_eks_cluster.eks.endpoint}"
   cluster_ca_certificate = "${base64decode(aws_eks_cluster.eks.certificate_authority.0.data)}"
-  token                  = "${data.external.heptio_authenticator_aws.result.token}"
+  token                  = "${data.external.aws-iam-authenticator.result.token}"
   load_config_file       = false
 }

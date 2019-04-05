@@ -23,4 +23,5 @@ module "eks" {
   subnet_ids = "${module.aws-vpc.subnet_ids}"
   node_instance_type = "${var.node_instance_type}"
   number_of_nodes = "${var.number_of_nodes}"
+  region = "${var.region}"
 }
