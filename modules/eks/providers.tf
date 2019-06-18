@@ -22,8 +22,8 @@ data "aws_region" "current" {}
 # the cluster in a single terraform apply.
 # https://github.com/terraform-providers/terraform-provider-kubernetes/issues/161
 #
-data "external" "heptio_authenticator_aws" {
-  program = ["bash", "${path.module}/Authenticator.sh"]
+data "external" "aws-iam-authenticator" {
+  program = ["bash", "${path.module}/authenticator.sh"]
 
   query {
     cluster_name = "${var.cluster_name}"
@@ -37,6 +37,6 @@ provider "kubernetes" {
   version = "~> 1.1"
   host                   = "${aws_eks_cluster.eks.endpoint}"
   cluster_ca_certificate = "${base64decode(aws_eks_cluster.eks.certificate_authority.0.data)}"
-  token                  = "${data.external.heptio_authenticator_aws.result.token}"
+  token                  = "${data.external.aws-iam-authenticator.result.token}"
   load_config_file       = false
 }

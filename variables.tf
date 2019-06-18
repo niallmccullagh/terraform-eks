@@ -19,3 +19,8 @@ variable "number_of_nodes" {
   type    = "string"
   description = "Number of work nodes to create"
 }
+
+variable "region" {
+  type        = "string"
+  description = "AWS region inside creating cluster"
+}

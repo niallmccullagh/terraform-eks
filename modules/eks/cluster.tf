@@ -81,9 +81,13 @@ resource "aws_eks_cluster" "eks" {
 }
 
 locals {
+  eks_update_kubeconfig = <<EKS_COMMAND
+    aws eks --region ${var.region} update-kubeconfig --name ${var.cluster_name}
+EKS_COMMAND
+}
+
+locals {
   kubeconfig = <<KUBECONFIG
-
-
 apiVersion: v1
 clusters:
 - cluster:
@@ -103,7 +107,7 @@ users:
   user:
     exec:
       apiVersion: client.authentication.k8s.io/v1alpha1
-      command: heptio-authenticator-aws
+      command: aws-iam-authenticator
       args:
         - "token"
         - "-i"

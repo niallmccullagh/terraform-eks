@@ -18,7 +18,7 @@ The sample architecture introduced here includes the following resources:
 
 What it does in addition over and above the terraform examples is:
 
-* Initialises the kubernetes provider, authenticating with (heptio_authenticator_aws)[https://github.com/kubernetes-sigs/aws-iam-authenticator]
+* Initialises the kubernetes provider, authenticating with (aws-iam-authenticator)[https://github.com/kubernetes-sigs/aws-iam-authenticator]
 * Create k8s config map to enable nodes to join the cluster
 
 
@@ -28,8 +28,9 @@ In order to follow this guide you will need:
 
 * An AWS account
 * Terraform installed and configured with your credentials
-* [Heptio AWS Authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator) installed
+* [AWS IAM Authenticator](https://github.com/kubernetes-sigs/aws-iam-authenticator) installed
 * [Kubectl](https://kubernetes.io/docs/imported/release/notes/#client-binaries) installed
+* [jq](https://stedolan.github.io/jq/) installed
 
 
 ## Provision
@@ -43,6 +44,7 @@ cluster_name = "demo"
 availability_zones = ["us-east-1b", "us-east-1c", "us-east-1d"]
 number_of_nodes = "1"
 node_instance_type = "m4.large"
+region = "us-east-1"
 ```
 
 **2. Initialise terraform**
@@ -79,7 +81,7 @@ commands will detect it and remind you to do so if necessary.
 ```
 $ terraform apply -var-file=vars.tfvars
 
-data.external.heptio_authenticator_aws: Refreshing state...
+data.external.aws-iam-authenticator: Refreshing state...
 data.http.workstation-external-ip: Refreshing state...
 data.aws_ami.eks-worker: Refreshing state...
 data.aws_region.current: Refreshing state...
